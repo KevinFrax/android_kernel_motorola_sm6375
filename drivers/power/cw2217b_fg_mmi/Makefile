@@ -1,11 +1,2 @@
-KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
-
-all:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules $(KBUILD_OPTIONS)
-
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
-
-clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
-
+cw2217b_fg_mmi-objs += cw2217B_fuel_gauge_base.o
+obj-$(CONFIG_MMI_CW2217B) += cw2217b_fg_mmi.o

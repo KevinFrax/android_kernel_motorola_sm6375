@@ -1,0 +1,11 @@
+config MMI_DISCRETE_CHARGER
+        tristate "MMI discrete charger"
+        select MMI_CHARGER
+        select TYPEC_ADAPTER_CLASS
+        default n
+        help
+         Say Y here if you have a mmi discrete compatible
+         device connected.
+
+         This driver can also be built as a module.  If so, the module
+         will be called mmi_discrete_charger.

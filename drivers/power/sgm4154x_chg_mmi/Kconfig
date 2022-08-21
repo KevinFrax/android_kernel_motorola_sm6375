@@ -1,0 +1,10 @@
+config MMI_SGM4154X
+        tristate "MMI SGM4154X"
+        select MMI_DISCRETE_CHARGER
+        default n
+        help
+         Say Y here if you have a mmi sgm4154x compatible
+         device connected.
+
+         This driver can also be built as a module.  If so, the module
+         will be called sgm4154x_charger.

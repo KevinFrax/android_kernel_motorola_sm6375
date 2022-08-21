@@ -1,11 +1,9 @@
-KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
+ccflags-y += -I$(srctree)/drivers/power/mmi_charger
 
-all:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules $(KBUILD_OPTIONS)
+mmi_discrete_charger-objs += mmi_discrete_charger_core.o
+mmi_discrete_charger-objs += mmi_discrete_charger_iio.o
+mmi_discrete_charger-objs += mmi_discrete_factory_tcmd.o
+mmi_discrete_charger-objs += mmi_discrete_voter.o
 
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
-
-clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
-
+obj-$(CONFIG_MMI_DISCRETE_CHARGER) += mmi_discrete_charger.o
+obj-$(CONFIG_MMI_DISCRETE_CHARGER) += mmi_discrete_charger_class.o

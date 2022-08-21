@@ -1,17 +1,10 @@
-all: modules
+ifneq ($(filter m y,$(CONFIG_MMI_CHARGER)),)
+    ccflags-y += -DUSE_MMI_CHARGER
+    ccflags-y += -I$(srctree)/$(src)/../mmi_charger
+endif
 
-modules:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules $(KBUILD_OPTIONS)
+ifneq ($(filter m y, $(CONFIG_ADAPTIVE_TOLERANCE_OPTIMIZATION)),)
+    ccflags-y += -DADAPTIVE_TOLERANCE_OPTIMIZATION
+endif
 
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(M) modules_install
-
-%:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) $@ $(KBUILD_OPTIONS)
-
-clean:
-	rm -f *.o *.ko *.mod.c *.mod.o *~ .*.cmd Module.symvers
-	rm -rf .tmp_versions
-
-KBUILD_EXTRA_SYMBOLS += $(CURDIR)/$(KBUILD_EXTMOD)/../mmi_charger/$(GKI_OBJ_MODULE_DIR)/Module.symvers
-
+obj-$(CONFIG_QPNP_ADAPTIVE_CHARGE) += qpnp_adaptive_charge.o

@@ -231,6 +231,7 @@ camera-$(CONFIG_SPECTRA_TFE) += \
 camera-y += camera_main.o
 
 obj-$(CONFIG_SPECTRA_CAMERA) += camera.o
+obj-$(CONFIG_SPECTRA_CAMERA) += ../../../drivers/media/platform/msm/camera/cam_sensor_module/cam_cci/cci_intf.o
 
 ifeq ($(CONFIG_SPECTRA_CAMERA),m)
 $(info "SPECTRA CAMERA IS BUILT AS DLKM")

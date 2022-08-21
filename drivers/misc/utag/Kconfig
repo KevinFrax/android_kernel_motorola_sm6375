@@ -1,0 +1,10 @@
+config MOTO_UTAGS
+	tristate "Moto UTAGS driver"
+	help
+	  Say Y here if you have UTAGS
+	  defined in your system.
+
+	  If unsure, say N.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called utags.

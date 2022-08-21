@@ -1,17 +1,50 @@
-all: modules
+obj-y := goodix_brl_mmi.o
+goodix_brl_mmi-objs := \
+					goodix_brl_spi.o \
+					goodix_ts_core.o \
+					goodix_brl_hw.o \
+					goodix_cfg_bin.o \
+					goodix_ts_utils.o \
+					goodix_brl_fwupdate.o \
+					goodix_ts_inspect.o \
+					goodix_ts_tools.o
 
-modules:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules $(KBUILD_OPTIONS)
+ifneq ($(filter m y, $(CONFIG_DRM_PANEL_EVENT_NOTIFICATIONS)),)
+	EXTRA_CFLAGS += -DCONFIG_DRM_PANEL_EVENT_NOTIFICATIONS
+endif
 
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(M) modules_install
+ifneq ($(filter m y,$(CONFIG_DRM_PANEL_NOTIFICATIONS)),)
+    EXTRA_CFLAGS += -DCONFIG_DRM_PANEL_NOTIFICATIONS
+endif
 
-%:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) $@ $(KBUILD_OPTIONS)
+ifneq ($(filter m y,$(CONFIG_TOUCHSCREEN_GOODIX_BRL_SPI)),)
+    EXTRA_CFLAGS += -DCONFIG_TOUCHSCREEN_GOODIX_BRL_SPI
+endif
 
-clean:
-	rm -f *.o *.ko *.mod.c *.mod.o *~ .*.cmd Module.symvers
-	rm -rf .tmp_versions
+ifneq ($(filter m y,$(CONFIG_GTP_FOD)),)
+    EXTRA_CFLAGS += -DCONFIG_GTP_FOD
+    goodix_brl_mmi-objs += goodix_ts_gesture_fod.o
+else
+    goodix_brl_mmi-objs += goodix_ts_gesture.o
+endif
 
-KBUILD_EXTRA_SYMBOLS += $(M)/../../../mmi_info/$(GKI_OBJ_MODULE_DIR)/Module.symvers
-KBUILD_EXTRA_SYMBOLS += $(M)/../touchscreen_mmi/$(GKI_OBJ_MODULE_DIR)/Module.symvers
+ifneq ($(filter m y,$(CONFIG_GTP_LIMIT_USE_SUPPLIER)),)
+    EXTRA_CFLAGS += -DCONFIG_GTP_LIMIT_USE_SUPPLIER
+endif
+
+ifneq ($(filter m y,$(CONFIG_GTP_ENABLE_PM_QOS)),)
+    EXTRA_CFLAGS += -DCONFIG_GTP_ENABLE_PM_QOS
+endif
+
+ifneq ($(filter m y,$(CONFIG_GOODIX_ESD_ENABLE)),)
+    EXTRA_CFLAGS += -DCONFIG_GOODIX_ESD_ENABLE
+endif
+
+ifneq ($(filter m y,$(CONFIG_TARGET_BUILD_FACROTY)),)
+    EXTRA_CFLAGS += -DGTP_SAVE_IN_CSV
+endif
+
+ifneq ($(filter m y,$(CONFIG_INPUT_TOUCHSCREEN_MMI)),)
+    EXTRA_CFLAGS += -DCONFIG_INPUT_TOUCHSCREEN_MMI
+    goodix_brl_mmi-objs += goodix_ts_mmi.o
+endif

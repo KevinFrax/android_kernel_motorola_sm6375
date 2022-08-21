@@ -1,0 +1,3 @@
+config MMI_CW2217B
+        tristate "MMI CW2217B"
+        default n

@@ -1,11 +1,9 @@
-KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
+mmi_parallel_charger_iio-objs += mmi_charger_class.o
+mmi_parallel_charger_iio-objs += mmi_charger_core.o
+mmi_parallel_charger_iio-objs += mmi_charger_pump_policy.o
+mmi_parallel_charger_iio-objs += mmi_cp_charger.o
+mmi_parallel_charger_iio-objs += qpnp_pmic_charger.o
+mmi_parallel_charger_iio-objs += mmi_qc3p.o
+mmi_parallel_charger_iio-objs += mmi_qc3p_cp_policy.o
 
-all:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules $(KBUILD_OPTIONS)
-
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
-
-clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
-
+obj-$(CONFIG_MMI_PARALLEL_CHARGER_IIO) += mmi_parallel_charger_iio.o

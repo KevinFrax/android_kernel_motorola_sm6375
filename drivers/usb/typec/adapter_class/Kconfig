@@ -1,0 +1,3 @@
+config TYPEC_ADAPTER_CLASS
+        tristate "adapter class"
+        default n

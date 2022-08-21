@@ -230,4 +230,18 @@ source "drivers/interconnect/Kconfig"
 
 source "drivers/counter/Kconfig"
 
+source "drivers/sensors/Kconfig"
+
+source "drivers/mmi_annotate/Kconfig"
+
+source "drivers/mmi_info/Kconfig"
+
+source "drivers/mmi_relay/Kconfig"
+
+source "drivers/moto_f_usbnet/Kconfig"
+
+source "drivers/watchdogtest/Kconfig"
+
+source "drivers/fm/Kconfig"
+
 endmenu

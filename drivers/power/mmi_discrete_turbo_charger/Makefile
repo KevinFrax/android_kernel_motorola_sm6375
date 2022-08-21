@@ -1,11 +1,9 @@
-KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
+mmi_discrete_turbo_charger-objs += mmi_charger_class.o
+mmi_discrete_turbo_charger-objs += mmi_charger_core.o
+mmi_discrete_turbo_charger-objs += mmi_charger_pump_policy.o
+mmi_discrete_turbo_charger-objs += mmi_cp_charger.o
+mmi_discrete_turbo_charger-objs += mmi_qc3p.o
+mmi_discrete_turbo_charger-objs += mmi_qc3p_cp_policy.o
+mmi_discrete_turbo_charger-objs += qpnp_pmic_charger.o
 
-all:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules $(KBUILD_OPTIONS)
-
-modules_install:
-	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
-
-clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
-
+obj-$(CONFIG_MMI_DISCRETE_TURBO_CHARGER) += mmi_discrete_turbo_charger.o
