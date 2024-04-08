@@ -5,14 +5,14 @@ EXTRA_CFLAGS += -I$(ANDROID_BUILD_TOP)/motorola/kernel/modules/include \
 
 subdir-ccflags-y += -Wall -Werror -DCONFIG_RT_REGMAP
 
-EXTRA_CFLAGS += -DCONFIG_PD_DBG_INFO
+ccflags-y += -DCONFIG_PD_DBG_INFO
 
 ifneq ($(filter m y,$(CONFIG_TCPC_CLASS)),)
-	EXTRA_CFLAGS += -DCONFIG_TCPC_CLASS
+	ccflags-y += -DCONFIG_TCPC_CLASS
 endif
 
 ifneq ($(filter m y,$(CONFIG_USB_POWER_DELIVERY)),)
-	EXTRA_CFLAGS += -DCONFIG_USB_POWER_DELIVERY
+	ccflags-y += -DCONFIG_USB_POWER_DELIVERY
 endif
 
 ifneq ($(filter m y,$(CONFIG_TCPC_RT1711H)),)
@@ -24,7 +24,7 @@ ifneq ($(filter m y,$(CONFIG_TCPC_SGM7220)),)
 endif
 
 ifneq ($(CONFIG_TCPC_MAX_POLLING_COUNT),)
-        EXTRA_CFLAGS += -DCONFIG_TCPC_MAX_POLLING_COUNT=$(CONFIG_TCPC_MAX_POLLING_COUNT)
+	ccflags-y += -DCONFIG_TCPC_MAX_POLLING_COUNT=$(CONFIG_TCPC_MAX_POLLING_COUNT)
 endif
 
 tcpc_class-objs			+= tcpci_core.o tcpci_typec.o tcpci_timer.o \

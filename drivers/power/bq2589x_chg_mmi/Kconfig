@@ -1,0 +1,10 @@
+config MMI_BQ2589X
+        tristate "MMI BQ2589X"
+        select MMI_DISCRETE_CHARGER
+        default n
+        help
+         Say Y here if you have a mmi bq2589x compatible
+         device connected.
+
+         This driver can also be built as a module.  If so, the module
+         will be called bq2589x_charger.

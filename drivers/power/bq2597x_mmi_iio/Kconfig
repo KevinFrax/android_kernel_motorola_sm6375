@@ -1,0 +1,3 @@
+config MMI_BQ2597X
+        tristate "MMI BQ2597X"
+        default n
